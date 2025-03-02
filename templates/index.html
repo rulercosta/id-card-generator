@@ -2,25 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ID Card Generator</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>ID Card Generator</h1>
+        <div class="header">
+            <div class="header-left">
+                <h1>ID Card Generator</h1>
+            </div>
+            <div class="header-right">
+                <a href="{{ url_for('logout') }}" class="action-btn logout-btn" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
         
         <div class="app-container">
             <div class="form-container">
                 <h2>Enter ID Card Details</h2>
-                <form id="idCardForm">
+                <form id="idCardForm" class="id-card-form">
+                    <div class="form-group">
+                        <label for="logo1">Logo 1:</label>
+                        <div class="image-upload-area" id="logo1UploadArea">
+                            <img src="{{ url_for('static', filename='img/number-1.png') }}" alt="Logo 1 preview" id="logo1Preview">
+                            <input type="file" id="logo1" name="logo1" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logo2">Logo 2:</label>
+                        <div class="image-upload-area" id="logo2UploadArea">
+                            <img src="{{ url_for('static', filename='img/number-2.png') }}" alt="Logo 2 preview" id="logo2Preview">
+                            <input type="file" id="logo2" name="logo2" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logo3">Logo 3:</label>
+                        <div class="image-upload-area" id="logo3UploadArea">
+                            <img src="{{ url_for('static', filename='img/number-3.png') }}" alt="Logo 3 preview" id="logo3Preview">
+                            <input type="file" id="logo3" name="logo3" accept="image/*" hidden>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="participantImage">Participant Image:</label>
                         <div class="image-upload-area" id="imageUploadArea">
                             <img src="{{ url_for('static', filename='img/placeholder-person.png') }}" alt="Upload preview" id="uploadAreaPreview">
-                            <span class="upload-text">Click to select photo</span>
                             <input type="file" id="participantImage" name="participantImage" accept="image/*" hidden>
                         </div>
                     </div>
@@ -65,10 +98,10 @@
                         <div class="card-inner">
                             <div class="logos-container">
                                 <div class="club-logo">
-                                    <img src="{{ url_for('static', filename='img/club-logo.png') }}" alt="Club Logo">
+                                    <img src="{{ url_for('static', filename='img/number-1.png') }}" alt="Club Logo">
                                 </div>
                                 <div class="college-logo">
-                                    <img src="{{ url_for('static', filename='img/college-logo.png') }}" alt="College Logo">
+                                    <img src="{{ url_for('static', filename='img/number-2.png') }}" alt="College Logo">
                                 </div>
                             </div>
                             
@@ -96,10 +129,10 @@
                         <div class="card-inner">
                             <div class="logos-container">
                                 <div class="club-logo">
-                                    <img src="{{ url_for('static', filename='img/club-logo.png') }}" alt="Club Logo">
+                                    <img src="{{ url_for('static', filename='img/number-1.png') }}" alt="Club Logo">
                                 </div>
                                 <div class="college-logo">
-                                    <img src="{{ url_for('static', filename='img/college-logo.png') }}" alt="College Logo">
+                                    <img src="{{ url_for('static', filename='img/number-2.png') }}" alt="College Logo">
                                 </div>
                             </div>
                             
