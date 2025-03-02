@@ -4,18 +4,17 @@ A web application for generating professional ID cards with modern design and in
 
 ## Features
 
-- Upload club logo, college logo, and participant photo
-- Enter participant details (name, role, ID number, etc.)
+- Upload logos and photo
+- Enter details (name, role, ID number, etc.)
 - Real-time preview of ID card with front and back sides
-- Interactive holographic effect on mouseover
-- Print or download ID cards as images
-- Responsive design for desktop and mobile use
+- Download ID card in .pdf format
+- Responsive mobile first layout
 
 ## Installation
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/id-card-generator.git
+   git clone https://github.com/rulercosta/id-card-generator.git
    cd id-card-generator
    ```
 
@@ -66,9 +65,6 @@ id-card-generator/
 └── requirements.txt         # Python dependencies
 ```
 
-## Requirements.txt Content
+## License
 
-```
-Flask
-Werkzeug
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
