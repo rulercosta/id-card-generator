@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ID Card Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h1>ID Card Generator</h1>
+            </div>
+        </div>
+        
+        <div class="app-container">
+            <div class="form-container">
+                <h2>Enter ID Card Details</h2>
+                <form id="idCardForm" class="id-card-form">
+                    <div class="form-group">
+                        <label for="logo1">Logo 1:</label>
+                        <div class="image-upload-area" id="logo1UploadArea">
+                            <img src="static/img/number-1.png" alt="Logo 1 preview" id="logo1Preview">
+                            <input type="file" id="logo1" name="logo1" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logo2">Logo 2:</label>
+                        <div class="image-upload-area" id="logo2UploadArea">
+                            <img src="static/img/number-2.png" alt="Logo 2 preview" id="logo2Preview">
+                            <input type="file" id="logo2" name="logo2" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logo3">Logo 3:</label>
+                        <div class="image-upload-area" id="logo3UploadArea">
+                            <img src="static/img/number-3.png" alt="Logo 3 preview" id="logo3Preview">
+                            <input type="file" id="logo3" name="logo3" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participantImage">Participant Image:</label>
+                        <div class="image-upload-area" id="imageUploadArea">
+                            <img src="static/img/placeholder-person.png" alt="Upload preview" id="uploadAreaPreview">
+                            <input type="file" id="participantImage" name="participantImage" accept="image/*" hidden>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="participantName">Participant Name:</label>
+                        <input type="text" id="participantName" name="participantName" placeholder="Enter full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="participantRole">Title:</label>
+                        <input type="text" id="participantRole" name="participantRole" placeholder="Enter title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idNumber">ID Number:</label>
+                        <input type="text" id="idNumber" name="idNumber" placeholder="Enter ID number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="department">Dept:</label>
+                        <input type="text" id="department" name="department" placeholder="Enter department name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter email address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                    </div>
+                    
+                </form>
+            </div>
+            
+            <div class="preview-container">
+                <h2>ID Card Preview</h2>
+                <div class="id-card-preview">
+                    <div class="id-card front">
+                        <div class="card-inner">
+                            <div class="logos-container">
+                                <div class="club-logo">
+                                    <img src="static/img/number-1.png" alt="Club Logo">
+                                </div>
+                                <div class="college-logo">
+                                    <img src="static/img/number-2.png" alt="College Logo">
+                                </div>
+                            </div>
+                            
+                            <div class="participant-image-container">
+                                <img id="participantImagePreview" src="static/img/placeholder-person.png" alt="Participant Image">
+                            </div>
+                            
+                            <div class="participant-details">
+                                <h2 id="participantNamePreview">PARTICIPANT NAME</h2>
+                                <p id="participantRolePreview">TITLE</p>
+                            </div>
+                            
+                            <div class="barcode-section">
+                                <div class="yellow-circle"></div>
+                                <div class="barcode-container">
+                                    <div id="barcodePreview" style="opacity: 0.8;">
+                                        <svg></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="id-card back">
+                        <div class="card-inner">
+                            <div class="logos-container">
+                                <div class="club-logo">
+                                    <img src="static/img/number-1.png" alt="Club Logo">
+                                </div>
+                                <div class="college-logo">
+                                    <img src="static/img/number-2.png" alt="College Logo">
+                                </div>
+                            </div>
+                            
+                            <div class="participant-details-back">
+                                <div class="detail-item">
+                                    <span class="label">ID</span>
+                                    <span id="idNumberPreview">xxxxxxxxxx</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Dept</span>
+                                    <span id="departmentPreview">Department Name</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Email</span>
+                                    <span id="emailPreview">email@example.com</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Phone</span>
+                                    <span id="phonePreview">+0 (000) 000-0000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="downloadBtn" class="action-btn">Download ID Card</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+    </script>
+    <div class="crop-modal">
+        <div class="crop-container">
+            <div class="cropper-container">
+                <img id="cropperImage" src="" alt="Image to crop">
+            </div>
+            <div class="crop-actions">
+                <button class="action-btn cancel">Cancel</button>
+                <button class="action-btn confirm">Crop & Upload</button>
+            </div>
+        </div>
+    </div>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
