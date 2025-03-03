@@ -35,13 +35,6 @@ body {
     padding: 10px;
 }
 
-.container.login-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
-
 h1 {
     text-align: center;
     margin-bottom: 30px;
@@ -485,80 +478,4 @@ input[type="file"]:hover {
 .id-card.back .participant-details-back {
     position: relative;
     z-index: 1;
-}
-
-.login-container {
-    max-width: 100%;
-    margin: 0 auto;
-    background-color: var(--card-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    width: 100%;
-}
-
-.login-form {
-    margin-top: 30px;
-}
-
-.login-btn {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.alert {
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.alert-error {
-    background-color: #fee2e2;
-    color: #dc2626;
-    border: 1px solid #fecaca;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: var(--card-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: 10px;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.header-left, .header-right {
-    display: flex;
-    align-items: center;
-}
-
-.logout-btn {
-    padding: 10px;
-    font-size: 16px;
-    background-color: var(--secondary-color);
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-.logout-btn:hover {
-    background-color: #34495e;
-    transform: scale(1.05);
-}
-
-.logout-btn i {
-    color: white;
 }
