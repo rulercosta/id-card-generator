@@ -313,3 +313,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadAreas = ['logo1', 'logo2', 'logo3'];
+    
+    uploadAreas.forEach(area => {
+        const uploadArea = document.getElementById(`${area}UploadArea`);
+        const input = document.getElementById(area);
+        const preview = document.getElementById(`${area}Preview`);
+        
+        if (uploadArea && input && preview) {  
+            uploadArea.addEventListener('click', () => input.click());
+            
+            input.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        
+                        if (area === 'logo1') {
+                            document.querySelectorAll('.club-logo img').forEach(img => {
+                                img.src = e.target.result;
+                            });
+                        } else if (area === 'logo2') {
+                            document.querySelectorAll('.college-logo img').forEach(img => {
+                                img.src = e.target.result;
+                            });
+                        } else if (area === 'logo3') {
+                            const cardBack = document.querySelector('.id-card.back .card-inner');
+                            if (cardBack) {
+                                const styleElement = document.createElement('style');
+                                styleElement.textContent = `
+                                    .id-card.back .card-inner::before {
+                                        background-image: url('${e.target.result}') !important;
+                                    }
+                                `;
+                                
+                                const oldStyle = document.getElementById('dynamic-bg-style');
+                                if (oldStyle) {
+                                    oldStyle.remove();
+                                }
+                                
+                                styleElement.id = 'dynamic-bg-style';
+                                document.head.appendChild(styleElement);
+                            }
+                        }
+                    };
+                    
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        }
+    });
+});
