@@ -1,14 +1,20 @@
-# Modern ID Card Generator
+# ID Card Generator
 
-A web application for generating professional ID cards with modern design and interactive features.
+Simple web-based tool to create and generate ID cards.
 
-## Features
+## Usage
 
-- Upload logos and photo
-- Enter details (name, role, ID number, etc.)
-- Real-time preview of ID card with front and back sides
-- Download ID card in .pdf format
-- Responsive mobile first layout
+1. Open index.html in your browser
+2. Upload logos (optional)
+3. Upload a participant photo
+4. Fill in the required information
+5. Click "Download ID Card" to save as PDF
+
+## Requirements
+
+- Modern web browser
+- No internet connection required
+- No installation needed
 
 ## License
 
