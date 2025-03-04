@@ -262,28 +262,57 @@ document.addEventListener('DOMContentLoaded', function() {
         if (uploadArea && input && preview) {  
             uploadArea.addEventListener('click', () => input.click());
             
-            input.addEventListener('change', async function(e) {
+            input.addEventListener('change', function(e) {
                 if (this.files && this.files[0]) {
-                    const formData = new FormData();
-                    formData.append(area, this.files[0]);
+                    const file = this.files[0];
                     
-                    try {
-                        const response = await fetch('/upload', {
-                            method: 'POST',
-                            body: formData
-                        });
-                        
-                        const data = await response.json();
-                        if (data.success && data.files[area]) {
-                            preview.src = data.files[area];
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please upload an image file');
+                        return;
+                    }
+                    
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File size should be less than 5MB');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            let width = img.width;
+                            let height = img.height;
+                            
+                            const MAX_SIZE = 800;
+                            if (width > MAX_SIZE || height > MAX_SIZE) {
+                                if (width > height) {
+                                    height = (height * MAX_SIZE) / width;
+                                    width = MAX_SIZE;
+                                } else {
+                                    width = (width * MAX_SIZE) / height;
+                                    height = MAX_SIZE;
+                                }
+                            }
+                            
+                            canvas.width = width;
+                            canvas.height = height;
+                            
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, width, height);
+                            
+                            const optimizedImageData = canvas.toDataURL('image/png', 0.8);
+                            
+                            preview.src = optimizedImageData;
                             
                             if (area === 'logo1') {
                                 document.querySelectorAll('.club-logo img').forEach(img => {
-                                    img.src = data.files[area];
+                                    img.src = optimizedImageData;
                                 });
                             } else if (area === 'logo2') {
                                 document.querySelectorAll('.college-logo img').forEach(img => {
-                                    img.src = data.files[area];
+                                    img.src = optimizedImageData;
                                 });
                             } else if (area === 'logo3') {
                                 const cardBack = document.querySelector('.id-card.back .card-inner');
@@ -291,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     const styleElement = document.createElement('style');
                                     styleElement.textContent = `
                                         .id-card.back .card-inner::before {
-                                            background-image: url('${data.files[area]}') !important;
+                                            background-image: url('${optimizedImageData}') !important;
                                         }
                                     `;
                                     
@@ -304,64 +333,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                     document.head.appendChild(styleElement);
                                 }
                             }
-                        }
-                    } catch (error) {
-                        console.error('Upload failed:', error);
-                    }
-                }
-            });
-        }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const uploadAreas = ['logo1', 'logo2', 'logo3'];
-    
-    uploadAreas.forEach(area => {
-        const uploadArea = document.getElementById(`${area}UploadArea`);
-        const input = document.getElementById(area);
-        const preview = document.getElementById(`${area}Preview`);
-        
-        if (uploadArea && input && preview) {  
-            uploadArea.addEventListener('click', () => input.click());
-            
-            input.addEventListener('change', function(e) {
-                if (this.files && this.files[0]) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        preview.src = e.target.result;
-                        
-                        if (area === 'logo1') {
-                            document.querySelectorAll('.club-logo img').forEach(img => {
-                                img.src = e.target.result;
-                            });
-                        } else if (area === 'logo2') {
-                            document.querySelectorAll('.college-logo img').forEach(img => {
-                                img.src = e.target.result;
-                            });
-                        } else if (area === 'logo3') {
-                            const cardBack = document.querySelector('.id-card.back .card-inner');
-                            if (cardBack) {
-                                const styleElement = document.createElement('style');
-                                styleElement.textContent = `
-                                    .id-card.back .card-inner::before {
-                                        background-image: url('${e.target.result}') !important;
-                                    }
-                                `;
-                                
-                                const oldStyle = document.getElementById('dynamic-bg-style');
-                                if (oldStyle) {
-                                    oldStyle.remove();
-                                }
-                                
-                                styleElement.id = 'dynamic-bg-style';
-                                document.head.appendChild(styleElement);
-                            }
-                        }
+                        };
+                        img.src = e.target.result;
                     };
                     
-                    reader.readAsDataURL(this.files[0]);
+                    reader.readAsDataURL(file);
                 }
             });
         }
